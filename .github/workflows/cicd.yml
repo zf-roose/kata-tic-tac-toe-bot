@@ -1,4 +1,4 @@
-name: CI/CD build pipeline with quality gate and coverage
+name: Build with quality gate and coverage
 
 on: [push]
 
