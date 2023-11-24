@@ -4,3 +4,7 @@ omit =
     tests/*
     # omit the semantic-release setup
     __version__.py
+
+[report]
+exclude_lines =
+    if __name__ == .__main__.:
