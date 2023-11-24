@@ -7,16 +7,18 @@ O = "O"
 _ = " "
 
 
-def main(sleep=2):
-    board = [[_, _, _],
-             [_, _, _],
-             [_, _, _]]
+def main(board=None, sleep=2):
+    if not board:
+        board = [[_, _, _],
+                 [_, _, _],
+                 [_, _, _]]
 
+    if validate(board) is False:
+        print("Unexpected error: invalid board")
+        return "Unexpected error: invalid board"
     output = show_init_board(board)
 
-    game_over = False
-    winner = ""
-    player = X
+    game_over, winner, player = init_game()
 
     while not game_over:
         board = get_next_move(board, player, sleep=sleep)
@@ -26,10 +28,39 @@ def main(sleep=2):
 
         if not game_over:
             player = switch_player(player)
-            output += f"\nNext player: {player}\n"
+            output += f"\nPlayer {player}:\n"
 
     output += "\n" + show_end_game_result(winner)
     return output
+
+
+def init_game():
+    return False, "", X
+
+
+def validate(board) -> bool:
+    return validate_board_size(board) and validate_board_content(board)
+
+
+def validate_board_size(board) -> bool:
+    if type(board) != list:
+        return False
+    if len(board) != 3:
+        return False
+    for row in board:
+        if type(row) != list:
+            return False
+        if len(row) != 3:
+            return False
+    return True
+
+
+def validate_board_content(board) -> bool:
+    for row in board:
+        for square in row:
+            if square not in [X, O, _]:
+                return False
+    return True
 
 
 def show_init_board(board):
@@ -44,6 +75,8 @@ def show_init_board(board):
 
 def show_board(board) -> str:
     board_out = copy.deepcopy(board)
+    # IDE formatting removes trailing spaces from the doubles
+    # at the end of the line so deal with this + conform kata output examples
     board_out[0][2] = "" if board_out[0][2] == " " else board_out[0][2]
     board_out[1][2] = "" if board_out[1][2] == " " else board_out[1][2]
     board_out[2][2] = "" if board_out[2][2] == " " else board_out[2][2]
@@ -57,18 +90,6 @@ def show_board(board) -> str:
     print(output)
     return output
 
-
-# def check_is_vertical_line(board) -> (bool, str):
-#     vertical_line = True
-#     for col_idx in range(len(board[0])):
-#         value = board[0][col_idx]
-#         for row_idx in range(len(board)):
-#             if board[row_idx][col_idx] != value:
-#                 vertical_line = False
-#         if vertical_line:
-#             return True, value
-#         vertical_line = True
-#     return False, ""
 
 def is_vertical_line(board) -> (bool, str):
     for col_idx in range(2):
@@ -105,6 +126,7 @@ def get_next_move(board, player, sleep=2):
             if square == _:
                 position = (row_idx, col_idx)
                 free_squares.append(position)
+
     if free_squares:
         free_idx = get_random_idx(len(free_squares))
         rnd_row_idx, rnd_col_idx = free_squares[free_idx]
@@ -122,17 +144,6 @@ def switch_player(player) -> str:
     next_player = O if player == X else X
     print(f"Next player: {next_player}")
     return next_player
-
-
-# def play_round(board, player) -> (bool, str):
-#     board = get_next_random_move(board, player)
-#     print(show_board(board))
-#
-#     game_over, winner = is_game_over(board)
-#     if not game_over:
-#         time.sleep(2)
-#         next_player = O if next_player == X else X
-#         print("Next player:", next_player)
 
 
 def is_board_full(board) -> bool:

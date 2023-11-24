@@ -9,20 +9,61 @@ O = "O"
 _ = " "
 
 
-@pytest.mark.skip
-class TestGuardian:
-    def test_return_value(self):
-        """Simple pytest test function to test pytest on the default main function"""
-        assert tic_tac_toe_bot.main("test") == "test"
+class TestGuardiansBoardSize:
+    """Board should have valid dimensions"""
+    def test_board_has_invalid_row(self):
+        assert tic_tac_toe_bot.validate_board_size(doubles.board_not_2d) is False
+
+    def test_string_is_invalid(self):
+        assert tic_tac_toe_bot.validate_board_size("") is False
+
+    def test_empty_list_is_invalid(self):
+        assert tic_tac_toe_bot.validate_board_size([]) is False
+
+    def test_board_size_3x4_is_invalid(self):
+        assert tic_tac_toe_bot.validate_board_size(doubles.board_3x4) is False
+
+    def test_board_size_4x3_is_invalid(self):
+        assert tic_tac_toe_bot.validate_board_size(doubles.board_4x3) is False
+
+    def test_board_size_2x2_is_invalid(self):
+        assert tic_tac_toe_bot.validate_board_size(doubles.board_2x2) is False
+
+    def test_empty_board_3x3_is_valid(self):
+        assert tic_tac_toe_bot.validate_board_size(doubles.empty_board_in) is True
 
 
-class TestShowInitBoard:
+class TestGuardiansBoardContent:
+    """Board should only contain expected content"""
+    def test_board_content_is_valid(self):
+        """squares should have X, O or be empty"""
+        assert tic_tac_toe_bot.validate_board_content(doubles.board_valid_content) is True
+
+    def test_board_content_is_invalid(self):
+        """squares should not contain anything else"""
+        assert tic_tac_toe_bot.validate_board_content(doubles.board_invalid_content) is False
+
+
+class TestInitGame:
+    """Set the right conditions for a new game"""
+
+    def test_game_not_over_no_winner_player_x_starts(self):
+        """- player X starts
+        - there is no winner ("")
+        - game is not over
+        """
+        assert tic_tac_toe_bot.init_game() == (False, "", X)
+
+
+class TestShowInitGame:
+    """Starting the game should render empty board output"""
     def test_show_init_board(self):
+        """should output board creation phase and show empty board in ascii table"""
         assert tic_tac_toe_bot.show_init_board(doubles.empty_board_in) == doubles.init_board_out
 
 
 class TestShowBoard:
-    """Should display a proper board with expected layout"""
+    """Should render a proper ascii board with moves of both players"""
     def test_1_empty_game_board(self):
         assert tic_tac_toe_bot.show_board(doubles.empty_board_in) == doubles.empty_board_out
 
@@ -76,7 +117,8 @@ class TestDiagonal:
 
 
 class TestGetFreeSquare:
-    def test_get_random_free_square_for_empty_board_between_0_and_8(self):
+    """Should return a random index from a list of free squares for the next move"""
+    def test_get_random_free_square_for_empty_board_between_0_and_8_included(self):
         rnd_idx = tic_tac_toe_bot.get_random_idx(9)
         assert 0 <= rnd_idx < 9
 
@@ -89,27 +131,27 @@ class TestGetFreeSquare:
 
 class TestSwitchPlayer:
     """Should switch the player"""
-    def test_return_next_player_o_after_player_x_turn(self):
+    def test_return_player_o_after_player_x_turn(self):
         assert tic_tac_toe_bot.switch_player(X) == O
 
-    def test_return_next_player_x_after_player_o_turn(self):
+    def test_return_player_x_after_player_o_turn(self):
         assert tic_tac_toe_bot.switch_player(O) == X
 
 
 class TestBoardFull:
     """Should report if all squares are filled"""
-    def test_board_is_empty(self):
+    def test_board_is_empty_returns_false(self):
         assert tic_tac_toe_bot.is_board_full(doubles.empty_board_in) is False
 
-    def test_board_has_some_empty_squares(self):
+    def test_board_has_some_empty_squares_returns_false(self):
         assert tic_tac_toe_bot.is_board_full(doubles.o_won_board_diagonal_in) is False
 
-    def test_board_is_full(self):
+    def test_board_is_full_returns_true(self):
         assert tic_tac_toe_bot.is_board_full(doubles.draw_board_in) is True
 
 
 class TestShowEndGameResult:
-    """Show message who won the game"""
+    """Should show message who won the game"""
 
     def test_x_wins(self):
         """X wins: PLAYER X WON!"""

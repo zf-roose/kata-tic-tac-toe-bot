@@ -1,12 +1,52 @@
 X = "X"
 O = "O"
 _ = " "
+E = "E"
+
+# INVALID BOARDS
+board_not_2d = [
+    [_, _, _],
+    "Invalid row",
+    [_, _, _]
+]
+
+board_3x4 = [
+    [_, _, _, _],
+    [_, _, _, _],
+    [_, _, _, _]
+]
+
+board_4x3 = [
+    [_, _, _],
+    [_, _, _],
+    [_, _, _],
+    [_, _, _]
+]
+
+board_2x2 = [
+    [_, _],
+    [_, E]
+]
+
+board_valid_content = [
+    [_, _, _],
+    [_, X, _],
+    [_, _, O]
+]
+
+board_invalid_content = [
+    [_, _, _],
+    [_, X, _],
+    [E, _, O]
+]
 
 # EMPTY BOARD
 
-empty_board_in = [[_, _, _],
-                  [_, _, _],
-                  [_, _, _]]
+empty_board_in = [
+    [_, _, _],
+    [_, _, _],
+    [_, _, _]
+]
 empty_board_out = """
  | |
 -+-+-
@@ -152,7 +192,7 @@ X| |
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X|O|
 -+-+-
@@ -160,7 +200,7 @@ X|O|
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X|O|X
 -+-+-
@@ -168,7 +208,7 @@ X|O|X
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X|O|X
 -+-+-
@@ -176,7 +216,7 @@ O| |
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X|O|X
 -+-+-
@@ -184,7 +224,7 @@ O|X|
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X|O|X
 -+-+-
@@ -192,7 +232,7 @@ O|X|O
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X|O|X
 -+-+-
@@ -217,7 +257,7 @@ X| |
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X| |
 -+-+-
@@ -225,7 +265,7 @@ X| |
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X| |
 -+-+-
@@ -233,7 +273,7 @@ X|O|
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X| |
 -+-+-
@@ -241,7 +281,7 @@ X|O|
 -+-+-
  | |O
 
-Next player: X
+Player X:
 
 X| |
 -+-+-
@@ -266,7 +306,7 @@ X| |
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X| |
 -+-+-
@@ -274,7 +314,7 @@ O| |
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X| |
 -+-+-
@@ -282,7 +322,7 @@ O| |
 -+-+-
 X| |
 
-Next player: O
+Player O:
 
 X| |
 -+-+-
@@ -290,7 +330,7 @@ O|O|
 -+-+-
 X| |
 
-Next player: X
+Player X:
 
 X| |X
 -+-+-
@@ -298,7 +338,7 @@ O|O|
 -+-+-
 X| |
 
-Next player: O
+Player O:
 
 X| |X
 -+-+-
@@ -323,7 +363,7 @@ X| |
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X| |
 -+-+-
@@ -331,7 +371,7 @@ O| |
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X| |
 -+-+-
@@ -339,7 +379,7 @@ O|X|
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X| |
 -+-+-
@@ -347,7 +387,7 @@ O|X|
 -+-+-
 O| |
 
-Next player: X
+Player X:
 
 X| |
 -+-+-
@@ -372,7 +412,7 @@ X| |
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X| |
 -+-+-
@@ -380,7 +420,7 @@ O| |
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X| |
 -+-+-
@@ -388,7 +428,7 @@ O| |X
 -+-+-
  | |
 
-Next player: O
+Player O:
 
 X|O|
 -+-+-
@@ -396,7 +436,7 @@ O| |X
 -+-+-
  | |
 
-Next player: X
+Player X:
 
 X|O|
 -+-+-
@@ -404,7 +444,7 @@ O| |X
 -+-+-
  |X|
 
-Next player: O
+Player O:
 
 X|O|
 -+-+-
@@ -412,7 +452,7 @@ O| |X
 -+-+-
  |X|O
 
-Next player: X
+Player X:
 
 X|O|
 -+-+-
@@ -420,7 +460,7 @@ O| |X
 -+-+-
 X|X|O
 
-Next player: O
+Player O:
 
 X|O|
 -+-+-
@@ -428,7 +468,7 @@ O|O|X
 -+-+-
 X|X|O
 
-Next player: X
+Player X:
 
 X|O|X
 -+-+-

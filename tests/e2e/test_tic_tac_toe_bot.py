@@ -10,6 +10,7 @@ _ = " "
 
 
 class TestPlayGameTicTacToe:
+    """Should play a game, showing the progress and report the winner if any"""
 
     def test_player_x_won_vertical_line(self):
         """Player X won with a vertical line"""
@@ -193,53 +194,6 @@ class TestPlayGameTicTacToe:
             ]
             assert tic_tac_toe_bot.main(sleep=0) == doubles.game_ends_with_draw_out
 
-    def test_player_x_won_when_random_move_is_sequential(self):
-        """Player X won a diagonal line:
-        - sequentially filled starting at [0][0], [0][1], [0][2], [1][0], ...
-        - game ends at step 7 with diagonal line on [2][0], [1][1], [0][2]"""
-        board_move_1 = [
-            [X, _, _],
-            [_, _, _],
-            [_, _, _]
-        ]
-        board_move_2 = [
-            [X, O, _],
-            [_, _, _],
-            [_, _, _]
-        ]
-        board_move_3 = [
-            [X, O, X],
-            [_, _, _],
-            [_, _, _]
-        ]
-        board_move_4 = [
-            [X, O, X],
-            [O, _, _],
-            [_, _, _]
-        ]
-        board_move_5 = [
-            [X, O, X],
-            [O, X, _],
-            [_, _, _]
-        ]
-        board_move_6 = [
-            [X, O, X],
-            [O, X, O],
-            [_, _, _]
-        ]
-        board_move_7 = [
-            [X, O, X],
-            [O, X, O],
-            [X, _, _]
-        ]
-        with patch("modules.tic_tac_toe_bot.get_next_move") as mocked_get_next_move:
-            mocked_get_next_move.side_effect = [
-                board_move_1,
-                board_move_2,
-                board_move_3,
-                board_move_4,
-                board_move_5,
-                board_move_6,
-                board_move_7
-            ]
-            assert tic_tac_toe_bot.main(sleep=0) == doubles.sequential_moves_game_out
+    def test_cannot_start_game_without_valid_board(self):
+        """Board init failure reports error"""
+        assert tic_tac_toe_bot.main(board=doubles.board_3x4, sleep=0) == "Unexpected error: invalid board"

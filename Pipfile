@@ -14,3 +14,6 @@ pytest-coverage = "*"
 [requires]
 python_version = "3.9"
 python_full_version = "3.9.6"
+
+[scripts]
+coverage = "pytest tests/unit tests/integration tests/e2e --cov-report term --cov='.' --cov-report html --cov='.' --cache-clear --rootdir='.'"
