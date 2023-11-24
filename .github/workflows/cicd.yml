@@ -29,3 +29,4 @@ jobs:
     - name: 🤖 Tests - 🧪 Unit - 🔌 Integration - 👩🏻‍💻 E2E
       run: |
         pipenv run coverageCICDPipeline
+        pipenv run coverage
