@@ -12,6 +12,7 @@ pytest-watch= "*"
 pytest-coverage = "*"
 pylint = "*"
 typing-extensions = "*"
+dill = "*"
 
 [requires]
 python_version = "3"
