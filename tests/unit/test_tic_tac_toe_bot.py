@@ -1,4 +1,5 @@
 import pytest
+from unittest.mock import patch
 
 from modules import tic_tac_toe_bot
 from tests.doubles import boards as doubles
@@ -74,21 +75,16 @@ class TestDiagonal:
         assert tic_tac_toe_bot.is_diagonal_line(doubles.draw_board_in) == (False, "")
 
 
-class TestGetNextMove:
-    """Should return next random move"""
-    def test_next_random_move_on_empty_board_should_not_be_empty(self):
-        """should return non-empty board with the next random move"""
-        empty_board_in = [[_, _, _],
-                          [_, _, _],
-                          [_, _, _]]
-        assert tic_tac_toe_bot.get_next_random_move(doubles.empty_board_in, X) != empty_board_in
+class TestGetFreeSquare:
+    def test_get_random_free_square_for_empty_board_between_0_and_8(self):
+        rnd_idx = tic_tac_toe_bot.get_random_idx(9)
+        assert 0 <= rnd_idx < 9
 
-    def test_next_random_move_on_full_board_should_remain_same_board(self):
-        """should return same full board after random move on full board"""
-        draw_board_in = [[X, O, X],
-                         [O, O, X],
-                         [X, X, O]]
-        assert tic_tac_toe_bot.get_next_random_move(doubles.draw_board_in, O) == draw_board_in
+    @patch('random.randrange')
+    def test_get_random_free_square_for_empty_board_is_5(self, mock_randrange):
+        mock_randrange.return_value = 5
+        rnd_idx = tic_tac_toe_bot.get_random_idx(9)
+        assert rnd_idx == 5
 
 
 class TestSwitchPlayer:

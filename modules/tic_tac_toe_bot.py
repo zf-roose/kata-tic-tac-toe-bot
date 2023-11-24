@@ -7,7 +7,7 @@ O = "O"
 _ = " "
 
 
-def main(testing=False):
+def main(sleep=2):
     board = [[_, _, _],
              [_, _, _],
              [_, _, _]]
@@ -19,7 +19,7 @@ def main(testing=False):
     player = X
 
     while not game_over:
-        board = get_next_random_move(board, player, testing=testing)
+        board = get_next_move(board, player, sleep=sleep)
         output += show_board(board)
 
         game_over, winner = is_game_over(board)
@@ -98,7 +98,7 @@ def is_diagonal_line(board) -> (bool, str):
     return False, ""
 
 
-def get_next_random_move(board, player, testing=False):
+def get_next_move(board, player, sleep=2):
     free_squares = []
     for row_idx, row in enumerate(board):
         for col_idx, square in enumerate(row):
@@ -106,14 +106,16 @@ def get_next_random_move(board, player, testing=False):
                 position = (row_idx, col_idx)
                 free_squares.append(position)
     if free_squares:
-        free_idx = random.randrange(len(free_squares)) if not testing else 0
+        free_idx = get_random_idx(len(free_squares))
         rnd_row_idx, rnd_col_idx = free_squares[free_idx]
         board[rnd_row_idx][rnd_col_idx] = player
 
-    sleep_time = 2 if not testing else 0
-    time.sleep(sleep_time)
-
+    time.sleep(sleep)
     return board
+
+
+def get_random_idx(idx_range) -> int:
+    return random.randrange(idx_range)
 
 
 def switch_player(player) -> str:

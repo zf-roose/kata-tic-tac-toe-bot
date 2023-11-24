@@ -123,9 +123,21 @@ X|O|
  | |
 """
 
-# NON-RANDOM MOVE END
+x_in_center_in = [[_, _, _],
+                  [_, X, _],
+                  [_, _, _]]
+x_in_center_out = """
+ | |
+-+-+-
+ |X|
+-+-+-
+ | |
+"""
 
-non_random_moves_game_out = """Game Board Creation...
+
+# E2E SCENARIOS
+
+sequential_moves_game_out = """Game Board Creation...
  | |
 -+-+-
  | |
@@ -189,3 +201,240 @@ O|X|O
 X| |
 
 PLAYER X WON!"""
+
+player_x_won_vertical_line_out = """Game Board Creation...
+ | |
+-+-+-
+ | |
+-+-+-
+ | |
+Board Created.
+The game will start with player X
+
+X| |
+-+-+-
+ | |
+-+-+-
+ | |
+
+Next player: O
+
+X| |
+-+-+-
+ |O|
+-+-+-
+ | |
+
+Next player: X
+
+X| |
+-+-+-
+X|O|
+-+-+-
+ | |
+
+Next player: O
+
+X| |
+-+-+-
+X|O|
+-+-+-
+ | |O
+
+Next player: X
+
+X| |
+-+-+-
+X|O|
+-+-+-
+X| |O
+
+PLAYER X WON!"""
+
+player_o_won_vertical_line_out = """Game Board Creation...
+ | |
+-+-+-
+ | |
+-+-+-
+ | |
+Board Created.
+The game will start with player X
+
+X| |
+-+-+-
+ | |
+-+-+-
+ | |
+
+Next player: O
+
+X| |
+-+-+-
+O| |
+-+-+-
+ | |
+
+Next player: X
+
+X| |
+-+-+-
+O| |
+-+-+-
+X| |
+
+Next player: O
+
+X| |
+-+-+-
+O|O|
+-+-+-
+X| |
+
+Next player: X
+
+X| |X
+-+-+-
+O|O|
+-+-+-
+X| |
+
+Next player: O
+
+X| |X
+-+-+-
+O|O|O
+-+-+-
+X| |
+
+PLAYER O WON!"""
+
+player_x_won_diagonal_line_out = """Game Board Creation...
+ | |
+-+-+-
+ | |
+-+-+-
+ | |
+Board Created.
+The game will start with player X
+
+X| |
+-+-+-
+ | |
+-+-+-
+ | |
+
+Next player: O
+
+X| |
+-+-+-
+O| |
+-+-+-
+ | |
+
+Next player: X
+
+X| |
+-+-+-
+O|X|
+-+-+-
+ | |
+
+Next player: O
+
+X| |
+-+-+-
+O|X|
+-+-+-
+O| |
+
+Next player: X
+
+X| |
+-+-+-
+O|X|
+-+-+-
+O| |X
+
+PLAYER X WON!"""
+
+game_ends_with_draw_out = """Game Board Creation...
+ | |
+-+-+-
+ | |
+-+-+-
+ | |
+Board Created.
+The game will start with player X
+
+X| |
+-+-+-
+ | |
+-+-+-
+ | |
+
+Next player: O
+
+X| |
+-+-+-
+O| |
+-+-+-
+ | |
+
+Next player: X
+
+X| |
+-+-+-
+O| |X
+-+-+-
+ | |
+
+Next player: O
+
+X|O|
+-+-+-
+O| |X
+-+-+-
+ | |
+
+Next player: X
+
+X|O|
+-+-+-
+O| |X
+-+-+-
+ |X|
+
+Next player: O
+
+X|O|
+-+-+-
+O| |X
+-+-+-
+ |X|O
+
+Next player: X
+
+X|O|
+-+-+-
+O| |X
+-+-+-
+X|X|O
+
+Next player: O
+
+X|O|
+-+-+-
+O|O|X
+-+-+-
+X|X|O
+
+Next player: X
+
+X|O|X
+-+-+-
+O|O|X
+-+-+-
+X|X|O
+
+THE GAME ENDS WITH A DRAW!"""
+
