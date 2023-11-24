@@ -88,7 +88,7 @@ class TestVertical:
     def test_o_has_vertical_line(self):
         assert tic_tac_toe_bot.is_vertical_line(doubles.o_won_board_vertical_in) == (True, O)
 
-    def test_no_player_has_no_vertical_line(self):
+    def test_no_player_has_a_vertical_line(self):
         assert tic_tac_toe_bot.is_vertical_line(doubles.draw_board_in) == (False, "")
 
 
@@ -100,7 +100,7 @@ class TestHorizontal:
     def test_x_has_horizontal_line(self):
         assert tic_tac_toe_bot.is_horizontal_line(doubles.x_won_board_horizontal_in) == (True, X)
 
-    def test_no_player_has_no_horizontal_line(self):
+    def test_no_player_has_a_horizontal_line(self):
         assert tic_tac_toe_bot.is_horizontal_line(doubles.draw_board_in) == (False, "")
 
 
@@ -112,7 +112,7 @@ class TestDiagonal:
     def test_o_has_diagonal_line(self):
         assert tic_tac_toe_bot.is_diagonal_line(doubles.o_won_board_diagonal_in) == (True, O)
 
-    def test_no_player_has_no_diagonal_line(self):
+    def test_no_player_has_a_diagonal_line(self):
         assert tic_tac_toe_bot.is_diagonal_line(doubles.draw_board_in) == (False, "")
 
 
