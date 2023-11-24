@@ -11,6 +11,7 @@ pytest-pspec = "*"
 pytest-watch= "*"
 pytest-coverage = "*"
 pylint = "*"
+typing-extensions = "*"
 
 [requires]
 python_version = "3"
