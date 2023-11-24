@@ -1,3 +1,5 @@
+![Build Status](https://github.com/zf-roose/kata-tic-tac-toe-bot/actions/workflows/cicd.yml/badge.svg)
+
 ======================
 Kata Objective
 ======================
